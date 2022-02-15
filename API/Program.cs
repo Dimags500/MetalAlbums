@@ -7,8 +7,15 @@ using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins, builder =>
+                          {
+                              builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                          });
+});
 
 // Add services to the container.
 var serviceSettings = builder.Configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
@@ -50,7 +57,7 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
