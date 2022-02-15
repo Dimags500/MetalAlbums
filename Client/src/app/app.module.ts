@@ -12,6 +12,7 @@ import { AlbumDetalisComponent } from './album/album-detalis/album-detalis.compo
 import { ApiService } from './services/api.service';
 import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { NewAlbumComponent } from './album/new-album/new-album.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -31,6 +32,8 @@ import { NewAlbumComponent } from './album/new-album/new-album.component';
     AppRoutingModule,
     RouterModule,
     HttpClientModule ,
+    FormsModule ,
+    ReactiveFormsModule
   
   ],
   providers: [ApiService],

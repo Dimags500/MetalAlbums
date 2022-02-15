@@ -198,9 +198,72 @@
                         </button> -->
                     </div>
                 </div>
-
+                <!--new album form -->
                 <div class="container" *ngIf="editMode">
-                    <p>Edit form</p>
+
+
+
+
+
+                    <section class="sample-app-content">
+                        <form [formGroup]="newAlbumForm" (ngSubmit)="onSubmitAlbum()">
+                            <!-- 
+                            <div class="form-group  col-6 m-2 p-2">
+                                <label for="Author">Author</label>
+                                <input type="text" class="form-control" name="Author" id="Author" placeholder="Author"
+                                    [(ngModel)]="author" #albumAuthor="ngModel">
+                            </div>
+
+                            <div class="form-group  col-6 m-2 p-2">
+                                <label for="Album">Album</label>
+                                <input type="text" class="form-control" name="Album" id="Album" placeholder="Album"
+                                    required [(ngModel)]="albumName" #album="ngModel">
+                            </div>
+
+                            <div class="form-group  col-6 m-2 p-2">
+                                <label for="Year">Year</label>
+                                <input type="number" class="form-control" name="Year" id="Year" placeholder="Year"
+                                    [(ngModel)]="year" #albumYear="ngModel">
+                            </div> -->
+                            <label for="album">Album: </label>
+                            <input id="album" type="text" formControlName="albumName">
+
+                            <label for="author">Author: </label>
+                            <input id="author" type="text" formControlName="albumAuthor">
+
+                            <label for="year">Year: </label>
+                            <input id="year" type="number" formControlName="albumYear">
+
+
+                            <input type="search" class="form-control mt-2" placeholder="Enter Serch term"
+                                [formControl]="secrField">
+                            <ul>
+                                <li *ngFor="let item of secrches">
+                                    {{item}}
+                                </li>
+                            </ul>
+
+
+
+
+                            <!-- <p>
+                                <label>Author</label>
+                                <input type="text" [ngModel]="author" name="bandName" required>
+                            </p>
+                            <p>
+                                <label>Album</label>
+                                <input type="text" [ngModel]="albumName" name="album" required>
+                            </p>
+
+                            <p>
+                                <label>Year</label>
+                                <input type="number" [ngModel]="year" name="albumYear">
+                            </p> -->
+                            <p>
+                                <button type=" submit" [disabled]="!newAlbumForm.valid">Submit</button>
+                            </p>
+                        </form>
+                    </section>
                 </div>
 
 
@@ -222,10 +285,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let album of albums ;index as i">
-                                <td>{{i}}</td>
-                                <td>{{album.author}}</td>
-                                <td>{{album.albumName}}</td>
+                            <tr *ngFor="let album of albums ;index as  i ">
+                                <td>{{i+1}}</td>
+                                <td> <span> <a [routerLink]="['../author/' ,album.author]"
+                                            style="text-decoration: none;">{{album.author}}</a></span>
+                                </td>
+                                <td><span> <a [routerLink]="['../album/' ,album.id]"
+                                            style="text-decoration: none;">{{album.albumName}}</a></span></td>
                                 <td>{{album.year}}</td>
                                 <td>{{album.albumPicture}}</td>
                                 <td>{{album.songs.length}}</td>

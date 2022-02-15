@@ -2,7 +2,7 @@
 
 
 export interface IAlbum {
-  id: string
+  id?: string
   author: string
   albumName: string
   year: number
