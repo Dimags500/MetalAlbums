@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Entites
 {
-    public class Album
+    public class Album : BaseEntity
     {
-        public int Id { get; set; }
+
+        public string Author { get; set; }
 
         public string AlbumName { get; set; }
 

@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Entites
 {
-    public class Song 
+    public class BaseEntity
     {
-        public string SongName { get; set; }
-        public int Year { get; set; }
-        public int TrackNumber { get; set; }
+        public Guid Id { get; set; } = new Guid();
 
     }
 }
