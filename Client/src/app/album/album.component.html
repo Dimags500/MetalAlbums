@@ -1,8 +1,11 @@
-<div class="card shadow-sm">
+<!-- <div class="card shadow-sm">
 
     <div class="col mt-3">
         <a href="{{album.albumName}}">
-            <img src="{{album.albumPicture}}" alt="">
+            <div class="container m-2">
+                <img src="{{album.albumPicture}}" alt="{{album.albumName}}" style="height: 250px;">
+
+            </div>
         </a>
     </div>
 
@@ -24,7 +27,20 @@
                 <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
             </div>
-            <small class="text-muted">9 mins</small>
         </div>
+    </div>
+</div> -->
+
+
+<div class="card">
+    <a [routerLink]="['../album/' ,album.id]">
+        <img class="card-img-top" src="{{album.albumPicture}}" alt="{{album.albumName}}">
+    </a>
+    <div class="card-body">
+        <h5 class="card-title"><a [routerLink]="['../album/' ,album.id]"
+                style="text-decoration: none;">{{album.albumName}}</a></h5>
+        <a [routerLink]="['../author/' ,album.author]">{{album.author}}</a>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted"> {{album.year}}</small></p>
     </div>
 </div>

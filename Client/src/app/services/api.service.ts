@@ -28,26 +28,19 @@ export class ApiService {
 
   createAlbum(album : IAlbum){
     
-    // this.http.post<IAlbum>('https://localhost:7199/Album ');
-
-    console.log('before' + (album as IAlbum));
-    
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(album);
-    console.log('after ' + body);
-    
-
-    // let amd = {
-    //   "author": album.author,
-    //   "albumName": album.albumName,
-    //   "year": album.year,
-    //   "albumPicture": album.albumPicture,
-    //   "songs": album.songs
-      
-    //       }
-
      return this.http.post<any>(this.baseUrl, album );
     
+
+  }
+
+  updateAlbum(album : IAlbum  , id : string){
+
+    const body = {"id" : id , "album": album}
+
+    console.log(body);
+
+
+    return this.http.put<any>(this.baseUrl + id, album);
 
   }
 }

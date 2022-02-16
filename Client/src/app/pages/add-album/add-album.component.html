@@ -1,0 +1,60 @@
+<!-- <div class="container">
+  <form [formGroup]="newAlbumForm" (ngSubmit)="onSubmitAlbum()">
+
+    <div class="form-group  col-6 m-2 p-2">
+      <label for="author">Author: </label>
+      <input id="author" type="text" formControlName="albumAuthor">
+    </div>
+
+    <div class="form-group  col-6 m-2 p-2">
+      <label for="album">Album: </label>
+      <input id="album" type="text" formControlName="albumName">
+    </div>
+
+    <div class="form-group  col-6 m-2 p-2">
+      <label for="year">Year: </label>
+      <input id="year" type="number" formControlName="albumYear">
+    </div>
+
+
+    <div class="form-group  col-6 m-2 p-2">
+      <label for="picture">Cover: </label>
+      <input id="picture" type="text" formControlName="albumPicture">
+    </div>
+
+    <p>
+      <button type=" submit" [disabled]="!newAlbumForm.valid">Submit</button>
+    </p>
+  </form>
+</div> -->
+
+<div class="container d-flex justify-content-center">
+
+  <form class="form-inline" [formGroup]="newAlbumForm" (ngSubmit)="onSubmitAlbum()">
+
+    <div class="form-group mb-2 ">
+      <label for="author">Author: </label>
+      <input id="author" type="text" formControlName="albumAuthor">
+    </div>
+
+    <div class="form-group mb-2 ">
+      <label for="author ">Author: </label>
+      <input id="author" type="text" formControlName="albumAuthor">
+    </div>
+    <div class="form-group mb-2 ">
+      <label for="year" class="mx-2">Year: </label>
+      <input id="year" type="number" formControlName="albumYear">
+    </div>
+    <div class="form-group mb-2 ">
+      <label for="picture">Cover: </label>
+      <input id="picture" type="text" formControlName="albumPicture">
+    </div>
+
+    <button type="button" class="btn btn-success m-2">Add Song</button>
+
+
+    <button type="submit" class="btn btn-primary m-2" [disabled]="!newAlbumForm.valid">Add Album</button>
+
+  </form>
+
+</div>

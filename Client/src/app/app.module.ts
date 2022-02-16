@@ -11,8 +11,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AlbumDetalisComponent } from './album/album-detalis/album-detalis.component';
 import { ApiService } from './services/api.service';
 import { AdminPageComponent } from './admin/admin-page/admin-page.component';
-import { NewAlbumComponent } from './album/new-album/new-album.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddAlbumComponent } from './pages/add-album/add-album.component';
+import { UpdateAlbumComponent } from './pages/update-album/update-album.component';
 
 
 
@@ -24,7 +25,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AlbumComponent,
     AlbumDetalisComponent,
     AdminPageComponent,
-    NewAlbumComponent,
+    AddAlbumComponent ,
+    UpdateAlbumComponent,
+    
     
   ],
   imports: [

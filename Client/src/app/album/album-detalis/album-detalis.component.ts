@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./album-detalis.component.css']
 })
 export class AlbumDetalisComponent implements OnInit {
-  id: any ;
+  id: any | undefined ;
   album! : IAlbum;
 
 
@@ -19,7 +19,6 @@ export class AlbumDetalisComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id') ;
     this.getAlbum();
 
-    console.log(this.id);
     
   }
 
@@ -28,7 +27,6 @@ export class AlbumDetalisComponent implements OnInit {
     this.api.getAlbum(this.id).subscribe((res)=>{
 
       this.album = res; 
-      console.log(this.album);
       
     },
     error =>{console.log(error);
