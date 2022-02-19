@@ -14,6 +14,8 @@ import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddAlbumComponent } from './pages/add-album/add-album.component';
 import { UpdateAlbumComponent } from './pages/update-album/update-album.component';
+import { AuthModule } from './auth/auth.module';
+import { UserMenuComponent } from './header/UserMenu/UserMenu.component';
 
 
 
@@ -27,6 +29,7 @@ import { UpdateAlbumComponent } from './pages/update-album/update-album.componen
     AdminPageComponent,
     AddAlbumComponent ,
     UpdateAlbumComponent,
+    UserMenuComponent
     
     
   ],
@@ -36,7 +39,8 @@ import { UpdateAlbumComponent } from './pages/update-album/update-album.componen
     RouterModule,
     HttpClientModule ,
     FormsModule ,
-    ReactiveFormsModule
+    ReactiveFormsModule ,
+    AuthModule
   
   ],
   providers: [ApiService],

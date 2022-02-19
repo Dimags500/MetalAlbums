@@ -1,15 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit , OnChanges , AfterViewChecked {
 
-  constructor() { }
+  loggedIn : BehaviorSubject<boolean> | undefined ;
+  status! : boolean
+  constructor(private auth: AuthService) { }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    
+  }
 
   ngOnInit(): void {
+
+    this.stausCheck();
   }
+
+  ngAfterViewChecked(){
+    //   this.stausCheck();
+    // console.log( 'after  '+ this.status);
+
+  }
+
+  stausCheck(){
+    this.auth.loggedIn.subscribe((data)=>{
+      this.status = data
+      console.log( "status" +this.status);
+      
+    });
+  }
+
+
 
 }

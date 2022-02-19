@@ -9,14 +9,29 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./album-detalis.component.css']
 })
 export class AlbumDetalisComponent implements OnInit {
-  id: any | undefined ;
+  id!: string ;
   album! : IAlbum;
 
 
   constructor(private route: ActivatedRoute , private api: ApiService ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id') ;
+
+    // this.id = this.route.snapshot.paramMap.get("id") ;
+
+    this.route.paramMap.subscribe((data)=> {
+
+      console.log(data);
+
+      const x = data.get('id');
+
+      this.id = x as string ;
+      console.log(x);
+      
+
+      
+    });
+
     this.getAlbum();
 
     
@@ -24,14 +39,17 @@ export class AlbumDetalisComponent implements OnInit {
 
   getAlbum(){
 
-    this.api.getAlbum(this.id).subscribe((res)=>{
+    this.api.getAlbum(this.id ).subscribe((res)=>{
 
       this.album = res; 
       
     },
-    error =>{console.log(error);
+    error =>{console.log(error)
     });
 
   }
+ 
 
 }
+
+

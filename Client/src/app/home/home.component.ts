@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
     this.api.getAlbums().subscribe( (res)=> {
 
       this.albums = res;
-      console.log(this.albums);
       
     } , error => {
       console.log(error);
