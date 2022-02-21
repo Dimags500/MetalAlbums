@@ -29,6 +29,8 @@ builder.Services.AddSingleton(serviceProvider =>
 });
 
 builder.Services.AddSingleton<IAlbumRepository, AlbumRepository>();
+builder.Services.AddSingleton<ISongRepository, SongRepository>();
+
 
 
 

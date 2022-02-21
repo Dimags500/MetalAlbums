@@ -1,7 +1,6 @@
 <div class="container ">
     <header class="py-3 mb-3 border-bottom">
         <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
-
             <div class="dropdown">
                 <a href="#"
                     class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none dropdown-toggle"
@@ -20,31 +19,46 @@
                     <li><a class="dropdown-item" href="#">Analytics</a></li>
                 </ul>
             </div>
+            <button class="btn btn-info" routerLink="./admin">Admin</button>
 
             <div class="d-flex align-items-center">
                 <form class="w-100 me-3">
                     <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
                 </form>
 
+                <div class="flex-shrink-0 dropdown" *>
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://www.acceptworldwide.com/wp-content/uploads/2017/05/Breaker_1981_cover.png"
+                            alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                        <li><a class="dropdown-item" routerLink="/admin">Admin Panel</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+                <!-- 
                 <ng-container *ngIf="!status">
                     <button routerLink="./login" class="btn btn-info">LogIn</button>
                 </ng-container>
 
                 <ng-container *ngIf="status">
-                    <button routerLink="./login" class="btn btn-info">LogOut</button>
-                </ng-container>
+                    <div class="container">
+                       
+                    </div>
+                </ng-container> -->
 
 
 
 
 
 
-                <!-- 
-                <ng-template #logInTemplate>
-                    <app-UserMenu></app-UserMenu>
-                    <button (click)="login()" class="btn btn-info">other</button>
 
-                </ng-template> -->
 
             </div>
         </div>

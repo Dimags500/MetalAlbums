@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <form [formGroup]="editAlbumForm" (ngSubmit)="onSubmitAlbum()">
 
     <div class="form-group  col-6 m-2 p-2">
@@ -26,4 +26,31 @@
       <button type=" submit" [disabled]="!editAlbumForm.valid">Submit</button>
     </p>
   </form>
-</div>
+</div> -->
+
+<form [formGroup]="albumForm" class="form-inline" (ngSubmit)="onSubmitAlbum()">
+  <h3>Create Album</h3>
+  <input class="form-control w-50" formControlName="albumName" placeholder="Name" />
+  <input class="form-control w-50" formControlName="albumAuthor" placeholder="Author" />
+  <input class="form-control w-50" formControlName="albumYear" placeholder="Year" />
+  <input class="form-control w-50" formControlName="albumPicture" placeholder="image" />
+
+
+  <button (click)="addSong()">add</button>
+  <h4>create song</h4>
+
+  <ng-container formArrayName="songs" *ngIf="songs.length < 0">
+    <div *ngFor="let _ of songs.controls; index as i">
+      <ng-container [formGroupName]="i">
+        <input formControlName="songName " placeholder="songName" />
+        <input formControlName="year " placeholder="yer" />
+        <input formControlName="trackNumber " placeholder="trackNumber" />
+
+
+      </ng-container>
+    </div>
+  </ng-container>
+  <p>
+    <button type=" submit" [disabled]="!albumForm.valid">Submit</button>
+  </p>
+</form>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 import { IAlbum } from 'src/app/modals/album';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -16,12 +16,19 @@ export class UpdateAlbumComponent implements OnInit {
   album!: IAlbum ;
 
  //new album form 
- editAlbumForm = new FormGroup({
+ albumForm = new FormGroup({
 
   albumName : new FormControl(''),
-  albumAuthor : new FormControl('') ,
-  albumYear : new FormControl('0') ,
-  albumPicture : new FormControl('https://www.acceptworldwide.com/wp-content/uploads/2017/06/Objection_Overruled_album.jpg') 
+    albumAuthor : new FormControl('') ,
+    albumYear : new FormControl('1973') ,
+    albumPicture : new FormControl('https://www.acceptworldwide.com/wp-content/uploads/2017/06/Objection_Overruled_album.jpg') ,
+    songs: new FormArray([
+      new FormGroup({
+        songName: new FormControl(''),
+        year: new FormControl('') ,
+        trackNumber: new FormControl('') 
+      })
+    ])
 
 
 });
@@ -39,17 +46,20 @@ export class UpdateAlbumComponent implements OnInit {
   onSubmitAlbum(){
 
 
-    let albumAuthor =  this.editAlbumForm.get('albumAuthor') as AbstractControl;
+    let albumAuthor =  this.albumForm.get('albumAuthor') as AbstractControl;
     this.album.author = albumAuthor.value;
 
-    let albumName =  this.editAlbumForm.get('albumName') as AbstractControl;
+    let albumName =  this.albumForm.get('albumName') as AbstractControl;
     this.album.albumName = albumName.value;
 
-    let albumYear =  this.editAlbumForm.get('albumYear') as AbstractControl;
+    let albumYear =  this.albumForm.get('albumYear') as AbstractControl;
     this.album.year = albumYear.value;
 
-    let albumPicture = this.editAlbumForm.get('albumPicture') as AbstractControl;
+    let albumPicture = this.albumForm.get('albumPicture') as AbstractControl;
     this.album.albumPicture = albumPicture.value ;
+
+    let songs = this.songs
+    this.album.songs = songs.value ;
 
     
 
@@ -81,11 +91,27 @@ export class UpdateAlbumComponent implements OnInit {
       albumAuthor : this.album.author ,
       albumName: this.album.albumName ,
       albumYear: this.album.year ,
-      albumPicture : this.album.albumPicture
+      albumPicture : this.album.albumPicture ,
+      songs : this.album.songs 
     }
 
-    this.editAlbumForm.setValue(alb);
+    this.albumForm.setValue(alb);
 
+  }
+
+
+  addSong() {
+    const group = new FormGroup({
+      songName: new FormControl(''),
+      year: new FormControl('') ,
+      trackNumber: new FormControl('') 
+    });
+
+    this.songs.push(group);
+  }
+
+  get songs() {
+    return this.albumForm.get('songs') as FormArray;
   }
 
 }

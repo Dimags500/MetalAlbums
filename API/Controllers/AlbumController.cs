@@ -45,8 +45,9 @@ namespace API.Controllers
                 AlbumName = album.AlbumName,
                 AlbumPicture = album.AlbumPicture,
                 Author = album.Author,
-                Songs = album.Songs,
                 Year = album.Year
+
+                //Songs = album.Songs,
             };
 
             await albumRepository.AddAlbumAsync(newAlbum);
@@ -83,11 +84,12 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            oldData.Songs = newData.Songs;
+            //oldData.Songs = newData.Songs;
+            //oldData.Songs.AddRange(newData.Songs);
+
             oldData.AlbumPicture = newData.AlbumPicture;
             oldData.Year = newData.Year;
             oldData.AlbumName = newData.AlbumName;  
-            oldData.Songs.AddRange(newData.Songs);  
             oldData.Author = newData.Author;
 
             await albumRepository.UpdateAlbumAsync(oldData);

@@ -18,6 +18,6 @@ namespace Core.Entites
 
         public string AlbumPicture { get; set; }
 
-        public List<Song> Songs { get; set; }
+        //public List<Song> Songs { get; set; }
     }
 }

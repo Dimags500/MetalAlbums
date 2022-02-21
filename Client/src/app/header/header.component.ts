@@ -7,35 +7,30 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit , OnChanges , AfterViewChecked {
+export class HeaderComponent implements OnInit  {
 
   loggedIn : BehaviorSubject<boolean> | undefined ;
   status! : boolean
   constructor(private auth: AuthService) { }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
-
-    
-  }
-
+ 
   ngOnInit(): void {
 
     this.stausCheck();
   }
 
-  ngAfterViewChecked(){
-    //   this.stausCheck();
-    // console.log( 'after  '+ this.status);
-
-  }
 
   stausCheck(){
-    this.auth.loggedIn.subscribe((data)=>{
-      this.status = data
-      console.log( "status" +this.status);
+
+    this.status = true; 
+
+
+    // this.auth.loggedIn.subscribe((data)=>{
+    //   this.status = data
+    //   console.log( "status" +this.status);
       
-    });
+    // });
   }
 
 
