@@ -10,12 +10,12 @@ namespace Core.Interfaces
     public interface IAuthorRepository
     {
 
-        Task<Author> GetAuthorAsync(Guid albumId);
+        Task<Author> GetAuthorAsync(int authorId);
 
         Task<IReadOnlyCollection<Author>> GetAllAuthorsAsync();
 
-        Task<Album> AddAuthorAsync(Album album);
-        Task DeleteAuthorAsync(Guid albumId);
-        Task<Album> UpdateAuthorAsync(Album album);
+        Task<Author> AddAuthorAsync(Author author);
+        Task DeleteAuthorAsync(int authorId);
+        Task<Author> UpdateAuthorAsync(Author album);
     }
 }

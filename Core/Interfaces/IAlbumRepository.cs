@@ -9,12 +9,12 @@ namespace Core.Interfaces
 {
     public interface IAlbumRepository
     {
-        Task<Album> GetAlbumAsync(Guid albumId);
+        Task<Album> GetAlbumAsync(int albumId);
 
         Task<IReadOnlyCollection<Album>> GetAllAlbumsAsycn();
 
         Task<Album> AddAlbumAsync(Album album);
-        Task DeleteAlbumAsync(Guid albumId);
+        Task DeleteAlbumAsync(int albumId);
         Task<Album> UpdateAlbumAsync(Album album);
 
     }
