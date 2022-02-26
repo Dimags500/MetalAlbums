@@ -139,7 +139,7 @@
 
 
                 <!--new album form -->
-                <div class="container" *ngIf="createMode">
+                <!-- <div class="container" *ngIf="createMode">
                     <app-add-album></app-add-album>
                 </div>
                 <div class="container" *ngIf="editMode">
@@ -169,15 +169,15 @@
                         <tbody>
                             <tr *ngFor=" let album of albums ; index as  i  ">
                                 <td>{{i+1}}</td>
-                                <td> <span> <a [routerLink]="['../author/' ,album.author]"
-                                            style="text-decoration: none;">{{album.author}}</a></span>
+                                <td> <span> <a [routerLink]="['../author/' ,album.authorID]"
+                                            style="text-decoration: none;">{{album.authorID}}</a></span>
                                 </td>
                                 <td><span> <a [routerLink]="['../album/' ,album.id]"
-                                            style="text-decoration: none;">{{album.albumName}}</a></span></td>
+                                            style="text-decoration: none;">{{album.name}}</a></span></td>
                                 <td>{{album.year }}</td>
                                 <td>
                                     <a [routerLink]="['../album/' ,album.id]"><img src="{{album.albumPicture}}"
-                                            alt="{{album.albumName}}" style="height: 100px;"></a>
+                                            alt="{{album.name}}" style="height: 100px;"></a>
                                 </td>
                                 <td>{{album.songs.length}}</td>
                                 <td>
@@ -203,4 +203,4 @@
 
 
 
-</body>
+</body> -->

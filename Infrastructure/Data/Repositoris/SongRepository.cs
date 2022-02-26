@@ -1,5 +1,7 @@
 ﻿using Core.Entites;
 using Core.Interfaces;
+using Infrastructure.Data.Context;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -11,47 +13,51 @@ namespace Infrastructure.Data.Repositoris
 {
     public class SongRepository : ISongRepository
     {
+        private readonly DataContext context;
 
-        //connecton
-        private const string colletionName = "songs";
-        private readonly IMongoCollection<Song> dbCollection;
-
-        //filters for mongoDb
-        private readonly FilterDefinitionBuilder<Song> filterBuilder = Builders<Song>.Filter;
-
-        public SongRepository( IMongoDatabase dataBase)
+        public SongRepository(DataContext context)
         {
-            dbCollection = dataBase.GetCollection<Song>(colletionName);
-
+            this.context = context;
         }
-
-
-
         public async Task<Song> AddSongAsync(Song song)
         {
-            if (song == null)
-            {
-                throw new ArgumentNullException(nameof(song));
-            };
+            await context.AddAsync(song);
+            await context.SaveChangesAsync();
 
-            await dbCollection.InsertOneAsync(song);
-
-            return song;
+            return await GetSongAsync(song.Id);
         }
 
-        public Task<bool> DeleteSongAsync(Guid id)
+        public async Task<bool> DeleteSongAsync(Song song)
         {
-            throw new NotImplementedException();
+            var toRemove = await GetSongAsync(song.Id);
+
+            if (toRemove != null)
+            {
+                context.Remove(toRemove);
+                await context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
         }
 
         public async Task<List<Song>> GetAllSongAsync()
         {
-            return await dbCollection.Find(filterBuilder.Empty).ToListAsync();
+            return await context.Songs.ToListAsync();
         }
 
-        public Task<Song> GetSongAsync(Guid id)
+        public async Task<Song> GetSongAsync(int id)
         {
-            throw new NotImplementedException();
+            return await context.Songs.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Song> UpdateSongAsync(Song song)
+        {
+            context.Update(song);
+            await context.SaveChangesAsync();
+
+            return GetSongAsync(song.Id).Result;
+            
         }
     }
 }

@@ -3,8 +3,8 @@
 
 export interface IAlbum {
   id?: string
-  author: string
-  albumName: string
+  authorID: number
+  name: string
   year: number
   albumPicture: string
   songs: ISong[]

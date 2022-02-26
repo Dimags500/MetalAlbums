@@ -9,10 +9,13 @@ namespace Core.Interfaces
 {
     public interface ISongRepository
     {
-        Task<Song> GetSongAsync(Guid id);
+        Task<Song> GetSongAsync(int id);
         Task<List<Song>> GetAllSongAsync();
         Task<Song> AddSongAsync(Song song);
-        Task<bool> DeleteSongAsync(Guid id);
+        Task<bool> DeleteSongAsync(Song song);
+
+        Task<Song> UpdateSongAsync(Song song);
+
 
 
 

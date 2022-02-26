@@ -3,33 +3,25 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
-import { AlbumComponent } from './album/album.component';
 import { RouterModule } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { AlbumDetalisComponent } from './album/album-detalis/album-detalis.component';
-import { ApiService } from './services/api.service';
+import { HttpClientModule } from '@angular/common/http';
 import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddAlbumComponent } from './pages/add-album/add-album.component';
-import { UpdateAlbumComponent } from './pages/update-album/update-album.component';
-import { AuthModule } from './auth/auth.module';
-import { UserMenuComponent } from './header/UserMenu/UserMenu.component';
+import { ApiService } from './servises/api.service';
+import { HeaderComponent } from './components/header/header.component';
+import { CardComponent } from './components/card/card.component';
+import { CardsComponent } from './components/cards/cards.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    HomeComponent,
-    AlbumComponent,
-    AlbumDetalisComponent,
-    AdminPageComponent,
-    AddAlbumComponent ,
-    UpdateAlbumComponent,
-    UserMenuComponent
+    HeaderComponent ,
+    CardComponent,
+    CardsComponent
+    
+
     
     
   ],
@@ -40,7 +32,6 @@ import { UserMenuComponent } from './header/UserMenu/UserMenu.component';
     HttpClientModule ,
     FormsModule ,
     ReactiveFormsModule ,
-    AuthModule
   
   ],
   providers: [ApiService],

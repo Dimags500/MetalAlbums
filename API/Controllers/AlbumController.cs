@@ -75,7 +75,7 @@ namespace API.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAlbumAsync(int id, Album newData)
+        public async Task<IActionResult> UpdateAlbumAsync(int id, UpdateAlbumDto newData)
         {
             var oldData = await albumRepository.GetAlbumAsync(id);
 

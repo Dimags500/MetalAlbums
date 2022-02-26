@@ -1,8 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { IAlbum } from 'src/app/modals/album';
-import { ApiService } from 'src/app/services/api.service';
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { ApiService } from 'src/app/servises/api.service';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class AdminPageComponent implements OnInit {
 
 
   
-  constructor( private api :ApiService) { }
+  constructor( private api : ApiService) { }
 
   ngOnInit(): void {
 
@@ -52,16 +52,16 @@ export class AdminPageComponent implements OnInit {
   }
 
   getAlbums(){
-    return this.api.getAlbums().subscribe((data)=> {
+    return this.api.get('album').subscribe((data: IAlbum[])=> {
 
       this.albums = data ;
 
-    }, error =>{console.log(error);
+    }, (error: any) =>{console.log(error);
     });
   }
   deleteAlbum(id: any){
 
-    this.api.deleteAlbum(id).subscribe();
+    this.api.delete('album',id).subscribe();
     location.reload();      
   }
 

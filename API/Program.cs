@@ -20,23 +20,13 @@ builder.Services.AddCors(options =>
                           });
 });
 
-//--------- Mongo db 
-//var serviceSettings = builder.Configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
-//builder.Services.AddSingleton(serviceProvider =>
-//{
-//    var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
-//    var mongoClient = new MongoClient(mongoDbSettings.ConnectionString);
-//    return mongoClient.GetDatabase(serviceSettings.ServiceName);
-//});
-
-//builder.Services.AddSingleton<IAlbumRepositorySQL, AlbumMongoRepository>();
-//builder.Services.AddSingleton<ISongRepository, SongRepository>();
 
 //---------sql 
 var cs = builder.Configuration.GetConnectionString("MsSQL");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(cs));
 builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<ISongRepository, SongRepository>();  
 
 
 

@@ -40,6 +40,8 @@ namespace Infrastructure.Data.Repositoris
         {
             var toDelete = await GetAlbumAsync(albumId);
              context.Albums.Remove(toDelete);
+            await context.SaveChangesAsync();
+
         }
 
 
@@ -57,6 +59,8 @@ namespace Infrastructure.Data.Repositoris
         public async Task<Album> UpdateAlbumAsync(Album album)
         {
              context.Albums.Update(album);
+
+            await context.SaveChangesAsync();
 
             return await GetAlbumAsync(album.Id);
         }
