@@ -1,4 +1,5 @@
-﻿using Core.Entites;
+﻿using API.Dtos;
+using Core.Entites;
 using Core.Interfaces;
 using Infrastructure.Data.Repositoris;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
 
 
     //[ApiExplorerSettings(IgnoreApi = true)]
@@ -27,7 +28,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Album>> GetAlbumByIdAsync(Guid id)
+        public async Task<ActionResult<Album>> GetAlbumByIdAsync(int id)
         {
             var album = await albumRepository.GetAlbumAsync(id);
             if (album == null)
@@ -38,15 +39,15 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Album>> CreateAlbumAsync(Album album)
+        public async Task<ActionResult<Album>> CreateAlbumAsync([FromBody] CreateAlbumDto album)
         {
             var newAlbum = new Album()
             {
-                AlbumName = album.AlbumName,
+                Name = album.Name,
                 AlbumPicture = album.AlbumPicture,
-                Author = album.Author,
-                Songs = album.Songs,
-                Year = album.Year
+                AuthorID = album.AuthorID,
+                Year = album.Year ,
+
             };
 
             await albumRepository.AddAlbumAsync(newAlbum);
@@ -57,7 +58,7 @@ namespace API.Controllers
 
         [HttpDelete("{id}")]
 
-        public async Task<ActionResult> DeleteAlbumAsync(Guid id)
+        public async Task<ActionResult> DeleteAlbumAsync(int id)
         {
             var album = await albumRepository.GetAlbumAsync(id);
 
@@ -74,7 +75,7 @@ namespace API.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAlbumAsync(Guid id, Album newData)
+        public async Task<IActionResult> UpdateAlbumAsync(int id, UpdateAlbumDto newData)
         {
             var oldData = await albumRepository.GetAlbumAsync(id);
 
@@ -83,16 +84,21 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            oldData.Songs = newData.Songs;
+            //oldData.Songs = newData.Songs;
+            //oldData.Songs.AddRange(newData.Songs);
+
             oldData.AlbumPicture = newData.AlbumPicture;
             oldData.Year = newData.Year;
-            oldData.AlbumName = newData.AlbumName;  
-            oldData.Songs.AddRange(newData.Songs);  
-            oldData.Author = newData.Author;
+            oldData.Name = newData.Name;
+            oldData.AuthorID = newData.AuthorID;
 
             await albumRepository.UpdateAlbumAsync(oldData);
 
             return Ok();
+
+
+
+
         }
 
 

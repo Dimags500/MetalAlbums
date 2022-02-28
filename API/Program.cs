@@ -1,27 +1,32 @@
 using API.Settings;
 using Core.Interfaces;
+using Infrastructure.Data.Context;
 using Infrastructure.Data.Repositoris;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
+using Microsoft.EntityFrameworkCore.Design;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-
-
-// Add services to the container.
-var serviceSettings = builder.Configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
-
-
-builder.Services.AddSingleton(serviceProvider =>
+builder.Services.AddCors(options =>
 {
-    var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
-    var mongoClient = new MongoClient(mongoDbSettings.ConnectionString);
-    return mongoClient.GetDatabase(serviceSettings.ServiceName);
+    options.AddPolicy(MyAllowSpecificOrigins, builder =>
+                          {
+                              builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                          });
 });
 
-builder.Services.AddSingleton<IAlbumRepository, AlbumRepository>();
+
+//---------sql 
+var cs = builder.Configuration.GetConnectionString("MsSQL");
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(cs));
+builder.Services.AddScoped<IAlbumRepository, AlbumRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<ISongRepository, SongRepository>();  
 
 
 
@@ -34,7 +39,7 @@ builder.Services.AddControllers( opt =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
+//BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
 
 var app = builder.Build();
 
@@ -50,7 +55,7 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
