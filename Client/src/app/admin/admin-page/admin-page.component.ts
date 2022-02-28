@@ -3,6 +3,8 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { IAlbum } from 'src/app/modals/album';
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ApiService } from 'src/app/servises/api.service';
+import { IAuthor } from 'src/app/modals/author';
+import { ISong } from 'src/app/modals/song';
 
 
 @Component({
@@ -13,22 +15,24 @@ import { ApiService } from 'src/app/servises/api.service';
 export class AdminPageComponent implements OnInit {
 
   albums:IAlbum[] = [];
+  authors: IAuthor[] = [] ;
+  songs : ISong []  = [] ;
+  showSongs = false ;
+  curr_songs : ISong[] = [];
+
+//modes to toggle
   createMode : boolean = false ;
   editMode : boolean = false ;
   albumToEditID! : any ;
+  createSong  = false;
+  createAuthor = false ;
+
 
 
   // serch field
   secrField!: FormControl ;
   secrches : string[] = [] ;
 
-
- 
-
-
-
-
-  
   constructor( private api : ApiService) { }
 
   ngOnInit(): void {
@@ -37,6 +41,8 @@ export class AdminPageComponent implements OnInit {
     // this.serch();
     
     this.getAlbums();
+    this.getAuthors();
+    this.getSongs();
   }
 
   private serch() {
@@ -54,11 +60,37 @@ export class AdminPageComponent implements OnInit {
   getAlbums(){
     return this.api.get('album').subscribe((data: IAlbum[])=> {
 
-      this.albums = data ;
-
+      this.albums = data ;      
     }, (error: any) =>{console.log(error);
     });
   }
+
+  getAuthors(){
+    this.api.get('author').subscribe((data)=>{
+     this.authors = data     
+      
+    } ,
+    error => console.log(error)
+    )
+  }
+
+  getAuthorName(id: any){
+    let name ;
+    name = this.authors[id -1] ;
+    return name.name
+  }
+
+  getSongs(){
+    this.api.get('song').subscribe((res)=>{
+      this.songs = res ;
+      
+    }, error => {
+      console.log(error);
+      
+    })
+  }
+
+
   deleteAlbum(id: any){
 
     this.api.delete('album',id).subscribe();
@@ -74,9 +106,23 @@ export class AdminPageComponent implements OnInit {
     this.albumToEditID = id ;
     this.editMode = !this.editMode ;
   }
+  showSongsToggle(albumID : any ){
+
+    let s = this.songs.filter(x => x.albumID == albumID) ;
+    this.curr_songs = s ;
+    this.showSongs = !this.showSongs;
+  }
 
   refresh(){
     location.reload();      
+  }
+
+  createSongToggle(){
+    this.createSong = !this.createSong ;
+  }
+  createAuthorToggle(){
+    this.createAuthor = !this.createAuthor;
+
   }
 
  

@@ -34,5 +34,8 @@ put(category : string  , id: any, item : any){
 delete(category : string  , id : any){
   return this.http.delete<any>(this.baseUrl+category+'/'+id);
 }
+deleteSong(id : any){
+  return this.http.delete<any>(this.baseUrl+ 'Song?id='+id);
+}
 
 }

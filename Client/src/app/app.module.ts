@@ -11,6 +11,11 @@ import { ApiService } from './servises/api.service';
 import { HeaderComponent } from './components/header/header.component';
 import { CardComponent } from './components/card/card.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { HomeComponent } from './components/home/home.component';
+import { AddEditFormComponent } from './forms/AddEditForm/AddEditForm.component';
+import { SongFormComponent } from './forms/SongForm/SongForm.component';
+import { AuthorFormComponent } from './forms/authorForm/authorForm.component';
+import { AuthorsComponent } from './components/authors/authors.component';
 
 
 
@@ -18,8 +23,15 @@ import { CardsComponent } from './components/cards/cards.component';
   declarations: [
     AppComponent,
     HeaderComponent ,
+    HomeComponent,
     CardComponent,
-    CardsComponent
+    CardsComponent ,
+    AdminPageComponent ,
+    AddEditFormComponent , 
+    SongFormComponent , 
+    AuthorFormComponent ,
+    AuthorsComponent ,
+    AuthorFormComponent
     
 
     

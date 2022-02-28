@@ -9,10 +9,19 @@ import { IAuthor } from 'src/app/modals/author';
 })
 export class CardsComponent implements OnInit {
   @Input() album! : IAlbum
-  @Input() author! : IAuthor
+  @Input() authorsArr! : IAuthor[]
   constructor() { }
 
   ngOnInit(): void {
+
+    // console.log(this.album);
+    // console.log(this.authorsArr);
+
+  }
+
+  getAuthorName(id: any){
+    return this.authorsArr[id -1].name as string ;
+
   }
 
 }

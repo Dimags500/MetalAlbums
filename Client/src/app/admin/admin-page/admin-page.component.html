@@ -116,7 +116,11 @@
                     <h1 class="h2">Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                            <button (click)="createModeToggle()" type="button" class="btn btn-sm btn-success">Add New
+                            <button (click)="createAuthorToggle()" type="button" class="btn btn-sm btn-warning">Add
+                                Author</button>
+                            <button (click)="createSongToggle()" type="button" class="btn btn-sm btn-info">Add
+                                Song</button>
+                            <button (click)="createModeToggle()" type="button" class="btn btn-sm btn-success">Add Album
                             </button>
                             <button (click)="refresh()" type="button"
                                 class="btn btn-sm btn-outline-info">Refresh</button>
@@ -144,7 +148,19 @@
                 </div>
                 <div class="container" *ngIf="editMode">
                     <app-update-album [albumID]="albumToEditID"></app-update-album>
-                </div>
+                </div>-->
+
+                <ng-container *ngIf="createMode">
+                    <app-AddEditForm></app-AddEditForm>
+                </ng-container>
+
+                <ng-container *ngIf="createSong">
+                    <app-SongForm></app-SongForm>
+                </ng-container>
+
+                <ng-container *ngIf="createAuthor">
+                    <app-authorForm></app-authorForm>
+                </ng-container>
 
 
 
@@ -166,11 +182,12 @@
 
                             </tr>
                         </thead>
+
                         <tbody>
                             <tr *ngFor=" let album of albums ; index as  i  ">
                                 <td>{{i+1}}</td>
                                 <td> <span> <a [routerLink]="['../author/' ,album.authorID]"
-                                            style="text-decoration: none;">{{album.authorID}}</a></span>
+                                            style="text-decoration: none;">{{getAuthorName(album.authorID)}}</a></span>
                                 </td>
                                 <td><span> <a [routerLink]="['../album/' ,album.id]"
                                             style="text-decoration: none;">{{album.name}}</a></span></td>
@@ -179,9 +196,14 @@
                                     <a [routerLink]="['../album/' ,album.id]"><img src="{{album.albumPicture}}"
                                             alt="{{album.name}}" style="height: 100px;"></a>
                                 </td>
-                                <td>{{album.songs.length}}</td>
+                                <td (click)="showSongsToggle(album.id)"
+                                    style="cursor: pointer; color: rgb(153, 0, 255);">
+                                    <a>Songs</a>
+                                </td>
+
                                 <td>
                                     <a [routerLink]="['../album/' ,album.id]"><i class="bi bi-text-center"></i></a>
+
                                 </td>
                                 <td (click)="editModeToggle(album.id)"
                                     style="cursor: pointer; color: rgb(6, 180, 122);"><i class="bi bi-wrench"></i>
@@ -189,10 +211,20 @@
                                 <td (click)="deleteAlbum(album.id)" style="cursor: pointer; color: red;"><i
                                         class="bi bi-x-circle"></i>
                                 </td>
-
-
                             </tr>
+                            <ng-container *ngIf="showSongs">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Song</th>
+                                </tr>
+                                <tr *ngFor="let item of curr_songs">
+                                    <td>{{item.trackNumber}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.year}}</td>
 
+
+                                </tr>
+                            </ng-container>
                         </tbody>
                     </table>
                 </div>
@@ -203,4 +235,4 @@
 
 
 
-</body> -->
+</body>

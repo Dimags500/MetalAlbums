@@ -2,16 +2,16 @@
 
 
 export interface IAlbum {
-  id?: string
+  id?: number
   authorID: number
   name: string
   year: number
   albumPicture: string
-  songs: ISong[]
+  // songs: ISong[]
 }
 
-export interface ISong {
-  songName: string
-  year: number
-  trackNumber: number
-}
+// export interface ISong {
+//   songName: string
+//   year: number
+//   trackNumber: number
+// }

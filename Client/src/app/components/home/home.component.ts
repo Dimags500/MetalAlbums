@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IAlbum } from 'src/app/modals/album';
+import { IAuthor } from 'src/app/modals/author';
 import { ApiService } from 'src/app/servises/api.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ApiService } from 'src/app/servises/api.service';
 export class HomeComponent implements OnInit {
 
   albums:IAlbum[] = [] ;
-  authors:IAlbum[] = [] ;
+  authors:IAuthor[] = [] ;
 
 
   constructor(private api : ApiService) { }
@@ -34,9 +35,7 @@ export class HomeComponent implements OnInit {
 
   getAuthors(){
     this.api.get('author').subscribe((data)=>{
-     this.authors = data
-     console.log(this.authors);
-     
+     this.authors = data     
       
     } ,
     error => console.log(error)
